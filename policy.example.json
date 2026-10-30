@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "network": "testnet",
+  "limits": {
+    "maxPerTxNear": "0.5",
+    "dailyLimitNear": "1",
+    "approvalThresholdNear": "0.2",
+    "maxTxPerDay": 20,
+    "maxGasTgas": 50,
+    "maxArgsBytes": 1024
+  },
+  "windowHours": 24,
+  "contracts": {
+    "hello.near-examples.testnet": { "methods": ["set_greeting"] },
+    "guestbook.near-examples.testnet": { "methods": ["add_message"] }
+  },
+  "transferAllowlist": ["bob.${ACCOUNT}"]
+}

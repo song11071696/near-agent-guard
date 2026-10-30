@@ -1,0 +1,4 @@
+.guard/
+policy.json
+node_modules/
+*.log

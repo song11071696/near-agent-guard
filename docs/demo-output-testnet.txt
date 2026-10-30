@@ -1,0 +1,23 @@
+▶ on-chain view: owner full-access key + scoped agent function-call keys
+  ed25519:GrSg7xatrx1bHi28tnoctairqFWcSBGrRhVK9Va41ctA  FullAccess  owner vault
+▶ 1. allowed: deposit-free call to an allowlisted contract (signed by the agent's function-call key)
+result  EXECUTED  signed by agent_fc_key  https://testnet.nearblocks.io/txns/57u3rVWaJQyc1pET1HT5FGRDodbQdzEwrwvGDtn3WCy9
+▶ 2. allowed, Chinese task: guestbook message
+result  EXECUTED  signed by agent_fc_key  https://testnet.nearblocks.io/txns/DyiRAcwz2eJ8HEPWSPp72NigNuS4GPjohbu3nwzeMnUM
+▶ 3. allowed: small transfer to an allowlisted recipient (below approval threshold → owner vault signs)
+result  EXECUTED  signed by owner_vault  https://testnet.nearblocks.io/txns/5Cmr3WS6WTrwTSe7NLopVWTYcCSTfparPrFLVWntsxg1
+▶ 4. denied: unknown recipient + over per-tx cap
+result  DENIED  RECIPIENT_ALLOWLIST, PER_TX_LIMIT, DAILY_LIMIT
+▶ 5. denied: prompt-injected task asking for a full-access key
+result  DENIED  FORBIDDEN_ACTION
+▶ 6. denied: token transfer on a contract that is not allowlisted
+result  DENIED  CONTRACT_ALLOWLIST
+▶ 7. human-in-the-loop: 0.25 NEAR ≥ 0.2 NEAR threshold → pending
+result  PENDING APPROVAL  approve with: npm run cli -- approve 4c04e9d5-12d2-445a-9943-8774e6a9538d
+▶    human approves 4c04e9d5-12d2-445a-9943-8774e6a9538d (policy is re-checked at approval time)
+result  EXECUTED  signed by owner_vault  https://testnet.nearblocks.io/txns/BqiJtGMMYMD542LEnqG7E2abEwmpMTcEZEsK5HrHnPfy
+▶ 8. bypass attempt: sign a Transfer with the agent key, skipping the policy engine
+✓ testnet REJECTED it (on-chain key scope holds):
+RPC send_tx error: {"name":"HANDLER_ERROR","cause":{"info":{},"name":"INVALID_TRANSACTION"},"code":-32000,"message":"Server error","data":{"TxExecutionError":{"InvalidTxError":{"InvalidAccessKeyError":"RequiresFullAccess"}}}}
+▶ 9. tamper-evident audit log
+✓ audit chain intact (27 records) /workspace/work/hackathons/near-hackathon/repo/.guard/audit.jsonl

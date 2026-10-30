@@ -1,0 +1,27 @@
+{
+  "name": "near-agent-guard",
+  "version": "0.1.0",
+  "description": "Policy/limit wallet for AI agents on NEAR testnet: function-call access keys + pre-signing policy engine + hash-chained audit log.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "bin": {
+    "near-agent-guard": "src/cli.ts"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.ts",
+    "cli": "node src/cli.ts",
+    "setup": "node src/cli.ts setup",
+    "demo:mock": "bash scripts/demo.sh --mock",
+    "demo": "bash scripts/demo.sh",
+    "serve": "node src/cli.ts serve",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "@types/node": "^22.0.0"
+  }
+}
